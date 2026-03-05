@@ -1,0 +1,276 @@
+/* ============================================================================
+   Header & Footer Shared Styles
+   Used across all pages (UnwrittenEvents, ServicesPage)
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@400;600&family=Libre+Caslon+Display&family=Bodoni+Moda:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* ============================================================================
+   HEADER / NAVIGATION
+   ============================================================================ */
+
+.header {
+  background: #fff;
+  padding: 28px 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-logo-monogram {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 52px;
+  font-weight: 400;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: #1a1a1a;
+}
+
+.header-logo-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #555;
+  margin-top: 2px;
+}
+
+.header-logo-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #999;
+  margin-top: 1px;
+}
+
+.header-nav {
+  width: 100%;
+}
+
+.header-nav-links {
+  display: flex;
+  gap: 44px;
+  list-style: none;
+  justify-content: center;
+}
+
+.header-nav-links a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 0.22em;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.65);
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.header-nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-nav-links a:hover::after,
+.header-nav-links a.active::after {
+  width: 100%;
+}
+
+.header-nav-links a:hover,
+.header-nav-links a.active {
+  color: #000;
+  font-weight: 600;
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+
+.footer {
+  background: #1a1814;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 48px 60px 24px;
+  margin-top: 0;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  max-width: 1440px;
+  margin: 0 auto 24px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Logo Section */
+.footer-logo-section {
+  align-items: flex-start;
+}
+
+.footer-logo-monogram {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: #f0ece6;
+  margin-bottom: 6px;
+}
+
+.footer-logo-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 16px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.footer-social-link {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+
+.footer-social-link:hover {
+  color: #fff;
+}
+
+.footer-contact {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1.7;
+}
+
+.footer-contact p {
+  margin: 0;
+}
+
+/* Navigation Section */
+.footer-nav-section h4,
+.footer-hours-section h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 16px;
+}
+
+.footer-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-nav-links a {
+  text-decoration: none;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+
+.footer-nav-links a:hover {
+  color: #fff;
+}
+
+/* Hours Section */
+.footer-hours-section p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  background: #1a1814;
+  text-align: center;
+  padding: 0 60px 24px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.08em;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 16px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 20px 30px 16px;
+  }
+
+  .header-logo-monogram {
+    font-size: 40px;
+  }
+
+  .header-nav-links {
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .header-nav-links a {
+    font-size: 12px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .footer {
+    padding: 36px 30px 20px;
+  }
+
+  .footer-bottom {
+    padding: 0 30px 20px;
+    padding-top: 12px;
+  }
+}

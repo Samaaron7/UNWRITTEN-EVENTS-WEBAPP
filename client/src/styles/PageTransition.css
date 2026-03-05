@@ -1,0 +1,202 @@
+/* ============================================================================
+   Page Transition Animations
+   Smooth fade and slide transitions between pages
+   ============================================================================ */
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pageOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Root container for page transitions */
+.page-container {
+  animation: fadeInScale 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth transitions for all interactive elements */
+button,
+a,
+input,
+textarea,
+select {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Section transitions */
+section {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Image transitions */
+img {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+img:hover {
+  transform: scale(1.02);
+}
+
+/* Card transitions */
+.card,
+.sp-card,
+.ue-gallery-card,
+.ue-journal-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover,
+.sp-card:hover,
+.ue-gallery-card:hover,
+.ue-journal-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Header transitions on page load */
+.header {
+  animation: fadeInScale 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+}
+
+/* Content sections stagger animation */
+.ue-hero,
+.sp-page-header {
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+.ue-strip,
+.sp-section-intro {
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+}
+
+.ue-who,
+.sp-service-grid {
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+}
+
+.ue-gallery,
+.sp-process {
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
+}
+
+.ue-crafting,
+.sp-addons {
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;
+}
+
+.ue-journal,
+.footer {
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.7s both;
+}
+
+/* Button hover effects */
+button:hover,
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+button:active,
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Text element transitions */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Link transitions */
+a {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+a:hover {
+  color: inherit;
+}
+
+/* Input focus transitions */
+input:focus,
+textarea:focus,
+select:focus {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Gradient backgrounds smooth transitions */
+[style*="background: linear-gradient"],
+[style*="background-image: linear-gradient"] {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Overlay transitions */
+.overlay,
+.modal-overlay {
+  animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Mobile-optimized transitions */
+@media (max-width: 768px) {
+  .page-container {
+    animation: fadeInScale 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card:hover,
+  .sp-card:hover,
+  .ue-gallery-card:hover,
+  .ue-journal-card:hover {
+    transform: translateY(-4px);
+  }
+
+  button:hover,
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+}

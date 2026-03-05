@@ -1,0 +1,367 @@
+/* ============================================================================
+   ServicesPage Styles
+   Services listing page with service grid, process, and add-ons
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Cormorant+SC:wght@400;600&family=Libre+Caslon+Display&family=Bodoni+Moda:ital,wght@0,400;1,400&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.sp-root {
+  font-family: 'Cormorant Garamond', serif;
+  background-color: #f8f8f5;
+  color: #1a1a1a;
+  min-height: 100vh;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ============================================================================
+   PAGE HEADER
+   ============================================================================ */
+
+.sp-page-header {
+  background: linear-gradient(180deg, #ece8e2 0%, #f2ede8 100%);
+  padding: 52px 60px 44px;
+  text-align: center;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sp-page-header h1 {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: 52px;
+  font-weight: 400;
+  color: #1a1a1a;
+  letter-spacing: 0.02em;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================================
+   SECTION INTRO
+   ============================================================================ */
+
+.sp-section-intro {
+  padding: 60px 80px 40px;
+  text-align: center;
+  background: #f8f8f5;
+}
+
+.sp-section-intro h2 {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 18px;
+  color: #1a1a1a;
+}
+
+.sp-section-intro p {
+  font-size: 18px;
+  line-height: 1.75;
+  color: #555;
+  max-width: 820px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+/* ============================================================================
+   SERVICE GRID & CARDS
+   ============================================================================ */
+
+.sp-service-grid {
+  padding: 20px 60px 60px;
+  background: #f8f8f5;
+}
+
+.sp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.sp-card {
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sp-card:hover {
+  transform: translateY(-12px);
+}
+
+.sp-card-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  border-radius: 2px;
+  background: #ccc;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sp-card:hover .sp-card-img {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.sp-card-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #aaa;
+  letter-spacing: 0.08em;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sp-card:hover .sp-card-placeholder {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.sp-card-title {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 12px;
+  margin-bottom: 5px;
+  color: #1a1a1a;
+  letter-spacing: 0.02em;
+}
+
+.sp-card-desc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* ============================================================================
+   PROCESS SECTION
+   ============================================================================ */
+
+.sp-process {
+  padding: 70px 60px 60px;
+  background: #fff;
+  text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.sp-process h2 {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: #1a1a1a;
+}
+
+.sp-process-tagline {
+  font-size: 16px;
+  font-style: italic;
+  color: #888;
+  margin-bottom: 52px;
+  letter-spacing: 0.05em;
+}
+
+.sp-process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.sp-process-steps::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.12);
+  z-index: 0;
+}
+
+.sp-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  padding: 0 16px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sp-step:hover {
+  transform: translateY(-4px);
+}
+
+.sp-step-icon {
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  font-size: 18px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sp-step:hover .sp-step-icon {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+  transform: scale(1.1);
+}
+
+.sp-step-title {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  color: #1a1a1a;
+}
+
+.sp-step-desc {
+  font-size: 13px;
+  color: #777;
+  line-height: 1.55;
+  font-weight: 300;
+}
+
+/* ============================================================================
+   ADD-ONS SECTION (Venue + Catering)
+   ============================================================================ */
+
+.sp-addons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  background: #f8f8f5;
+}
+
+.sp-addon {
+  padding: 36px 44px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sp-addon:hover {
+  background: rgba(0, 0, 0, 0.02);
+  transform: translateX(8px);
+}
+
+.sp-addon-icon {
+  font-size: 22px;
+  color: #a08878;
+  margin-top: 2px;
+  flex-shrink: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sp-addon:hover .sp-addon-icon {
+  transform: scale(1.2) rotate(8deg);
+}
+
+.sp-addon h4 {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  color: #1a1a1a;
+}
+
+.sp-addon p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+  .sp-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sp-process-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .sp-process-steps::before {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .sp-page-header h1 {
+    font-size: 40px;
+  }
+
+  .sp-section-intro {
+    padding: 40px 30px;
+  }
+
+  .sp-section-intro h2 {
+    font-size: 28px;
+  }
+
+  .sp-section-intro p {
+    font-size: 16px;
+  }
+
+  .sp-service-grid {
+    padding: 20px 30px 40px;
+  }
+
+  .sp-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sp-process {
+    padding: 50px 30px 40px;
+  }
+
+  .sp-process h2 {
+    font-size: 28px;
+  }
+
+  .sp-process-steps {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .sp-addons {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-addon {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 30px;
+  }
+
+  .sp-addon:last-child {
+    border-bottom: none;
+  }
+}
