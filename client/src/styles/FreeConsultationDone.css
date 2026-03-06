@@ -1,0 +1,361 @@
+/* ================================================================
+   FreeConsultationDone.css
+   Unwritten Events · Booking Confirmation page
+   Tokens inherited from FreeConsultation.css via :root
+================================================================ */
+
+/* ── Entry animations ── */
+@keyframes fcd-fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fcd-scaleIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fcd-checkBounce {
+  0%   { transform: scale(0) rotate(-15deg); opacity: 0; }
+  60%  { transform: scale(1.2) rotate(5deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); }
+}
+
+@keyframes fcd-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(107, 70, 193, 0.3); }
+  50%       { box-shadow: 0 0 0 14px rgba(107, 70, 193, 0); }
+}
+
+/* ================================================================
+   MAIN WRAPPER  — full-viewport centred layout
+================================================================ */
+.fcd-main {
+  min-height: calc(100vh - 200px); /* account for header + footer */
+  background: var(--color-bg-section);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 60px 24px 80px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Triggered by JS when component mounts */
+.fcd-main.fcd-visible {
+  opacity: 1;
+}
+
+/* ================================================================
+   SECTION WRAPPER
+================================================================ */
+.fcd-section {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+/* ================================================================
+   CONFIRMATION CARD
+================================================================ */
+.fcd-card {
+  width: 100%;
+  background: var(--color-white);
+  border-radius: 16px;
+  box-shadow: var(--shadow-elevated);
+  padding: 48px 48px 40px;
+  text-align: center;
+  border: 1px solid rgba(107, 70, 193, 0.1);
+  animation: fcd-fadeUp 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s both;
+}
+
+/* ── Success icon cluster ── */
+.fcd-icon-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.fcd-avatar-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c8a888, #a07858);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-caps);
+  font-size: 24px;
+  color: var(--color-white);
+  animation: fcd-pulse 2.8s ease-in-out infinite;
+  /* BACKEND: Replace with consultant avatar image when available */
+}
+
+.fcd-check-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-purple-accent);
+  color: var(--color-white);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-white);
+  animation: fcd-checkBounce 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.45s both;
+}
+
+/* ── Heading ── */
+.fcd-title {
+  font-family: var(--font-caps);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-text-dark);
+  margin-bottom: 8px;
+  animation: fcd-fadeUp 0.5s ease 0.2s both;
+}
+
+.fcd-subtitle {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  color: var(--color-text-light);
+  line-height: 1.6;
+  margin-bottom: 28px;
+  font-weight: 300;
+  animation: fcd-fadeUp 0.5s ease 0.28s both;
+}
+
+/* ── Booking detail block (mirrors Figma "Schedule eClosing" panel) ── */
+.fcd-details-block {
+  background: var(--color-bg-section);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  text-align: left;
+  margin-bottom: 28px;
+  animation: fcd-fadeUp 0.5s ease 0.35s both;
+}
+
+.fcd-details-heading {
+  font-family: var(--font-caps);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--color-text-dark);
+  margin-bottom: 14px;
+  /* BACKEND: Optionally prepend event type: "{eventType} Consultation" */
+}
+
+.fcd-detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--color-text-mid);
+  line-height: 1.5;
+}
+
+.fcd-detail-row:last-child { border-bottom: none; }
+
+.fcd-detail-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 14px;
+}
+
+/* Google Meet link style */
+.fcd-meet-link {
+  color: var(--color-purple-accent);
+  text-decoration: underline;
+  font-weight: 400;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.fcd-meet-link:hover { color: #5a3ab0; }
+
+/* ── Action buttons ── */
+.fcd-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fcd-fadeUp 0.5s ease 0.45s both;
+}
+
+/* Primary — Google Calendar */
+.fcd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: 40px;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border: none;
+  transition:
+    background 0.25s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+  width: 100%;
+}
+
+.fcd-btn--primary {
+  background: var(--color-purple-accent);
+  color: var(--color-white);
+}
+
+.fcd-btn--primary:hover {
+  background: #5a3ab0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(107, 70, 193, 0.35);
+}
+
+.fcd-btn--outline {
+  background: var(--color-white);
+  color: var(--color-purple-accent);
+  border: 1.5px solid var(--color-purple-accent);
+}
+
+.fcd-btn--outline:hover {
+  background: var(--color-purple-light);
+  transform: translateY(-1px);
+}
+
+.fcd-btn--ghost {
+  background: transparent;
+  color: var(--color-text-light);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 40px;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  width: auto;
+}
+
+.fcd-btn--ghost:hover {
+  color: var(--color-text-dark);
+  border-color: rgba(0, 0, 0, 0.2);
+  background: var(--color-white);
+}
+
+/* ================================================================
+   NEXT STEPS SECTION
+================================================================ */
+.fcd-next-steps {
+  width: 100%;
+  animation: fcd-fadeUp 0.55s ease 0.4s both;
+}
+
+.fcd-next-title {
+  font-family: var(--font-caps);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--color-text-dark);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.fcd-next-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fcd-next-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--color-white);
+  border-radius: 10px;
+  padding: 18px 20px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  animation: fcd-fadeUp 0.5s ease both;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.fcd-next-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.fcd-next-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  /* Subtle background circle */
+  width: 42px;
+  height: 42px;
+  background: var(--color-purple-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fcd-next-content { flex: 1; }
+
+.fcd-next-item-title {
+  font-family: var(--font-caps);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--color-text-dark);
+  margin-bottom: 4px;
+}
+
+.fcd-next-item-desc {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  color: var(--color-text-light);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* ================================================================
+   SECONDARY ACTIONS  (bottom of page)
+================================================================ */
+.fcd-secondary-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fcd-fadeUp 0.5s ease 0.55s both;
+  padding-bottom: 8px;
+}
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+@media (max-width: 720px) {
+  .fcd-card {
+    padding: 32px 24px 28px;
+    border-radius: 12px;
+  }
+  .fcd-title { font-size: 22px; }
+  .fcd-next-item { padding: 14px 16px; }
+}
+
+@media (max-width: 480px) {
+  .fcd-main { padding: 40px 16px 60px; }
+  .fcd-card { padding: 24px 18px 22px; }
+  .fcd-secondary-actions { flex-direction: column; align-items: center; }
+  .fcd-btn--ghost { width: 100%; text-align: center; }
+}

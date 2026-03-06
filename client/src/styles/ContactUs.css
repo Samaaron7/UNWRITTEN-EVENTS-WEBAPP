@@ -1,0 +1,930 @@
+/* ================================================================
+   ContactUs.css — Unwritten Events · Contact Us page
+   
+   Follows site-wide design token system.
+   All animation / class names prefixed "cu-" to avoid collisions.
+   
+   Sections:
+     1. Hero banner
+     2. Contact info cards (3-col)
+     3. Two-column layout: Contact form | Office details
+     4. Map placeholder
+     5. FAQ accordion
+     6. Free Consultation CTA band (reused across site)
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@400;600&family=Libre+Caslon+Display&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&display=swap');
+
+/* ── Brand tokens (mirrors full site system) ── */
+:root {
+  --color-cream:          #f8f8f5;
+  --color-bg-section:     #f2efe9;
+  --color-blush:          #f5ecec;
+  --color-blush-mid:      #f0e4e4;
+  --color-pink-accent:    #e0407a;
+  --color-purple-accent:  #6b46c1;
+  --color-purple-light:   #ede9f8;
+  --color-charcoal:       #1a1814;
+  --color-text-dark:      #1a1a1a;
+  --color-text-mid:       #444;
+  --color-text-light:     #888;
+  --color-border:         rgba(0, 0, 0, 0.08);
+  --color-white:          #ffffff;
+
+  --font-display:  'Bodoni Moda', serif;
+  --font-serif:    'Cormorant Garamond', serif;
+  --font-caps:     'Libre Caslon Display', serif;
+
+  --radius-card:      10px;
+  --shadow-card:      0 4px 20px rgba(0, 0, 0, 0.07);
+  --shadow-elevated:  0 12px 40px rgba(0, 0, 0, 0.12);
+  --transition-base:  0.25s ease;
+  --transition-lift:  0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Keyframes ── */
+@keyframes cu-fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cu-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes cu-scaleIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes cu-slideRight {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes cu-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(224, 64, 122, 0.3); }
+  50%       { box-shadow: 0 0 0 10px rgba(224, 64, 122, 0); }
+}
+
+/* ================================================================
+   PAGE ROOT
+================================================================ */
+.cu-root {
+  font-family: var(--font-serif);
+  background-color: var(--color-cream);
+  color: var(--color-text-dark);
+  min-height: 100vh;
+}
+
+/* ================================================================
+   1. HERO BANNER
+================================================================ */
+.cu-hero {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  animation: cu-fadeIn 0.5s ease both;
+}
+
+.cu-hero-bg {
+  position: absolute;
+  inset: 0;
+  /* BACKEND: Replace with real hero image:
+     background: url('src/assets/frontEnd-images/contact_hero.jpg') center/cover no-repeat; */
+  background: linear-gradient(160deg, #e8e2d8 0%, #d4cbc0 40%, #c0b4a8 70%, #b0a494 100%);
+}
+
+.cu-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.12) 0%,
+    rgba(0,0,0,0.38) 60%,
+    rgba(0,0,0,0.58) 100%
+  );
+}
+
+.cu-hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 0 24px;
+  animation: cu-fadeUp 0.65s ease 0.1s both;
+}
+
+.cu-hero-eyebrow {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+}
+
+.cu-hero-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 400;
+  color: var(--color-white);
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.3);
+  line-height: 1.15;
+}
+
+.cu-hero-sub {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  color: rgba(255,255,255,0.75);
+  font-weight: 300;
+  max-width: 520px;
+  line-height: 1.65;
+}
+
+.cu-hero-divider {
+  width: 44px;
+  height: 1px;
+  background: rgba(255,255,255,0.45);
+  margin-top: 4px;
+}
+
+/* ================================================================
+   2. CONTACT INFO CARDS  (phone / email / studio hours)
+================================================================ */
+.cu-info-band {
+  background: var(--color-white);
+  padding: 0 80px;
+  border-bottom: 1px solid var(--color-border);
+  animation: cu-fadeUp 0.6s ease 0.15s both;
+}
+
+.cu-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.cu-info-card {
+  padding: 36px 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  border-right: 1px solid var(--color-border);
+  transition: background var(--transition-base);
+}
+
+.cu-info-card:last-child { border-right: none; }
+
+.cu-info-card:hover { background: var(--color-cream); }
+
+.cu-info-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-blush);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  animation: cu-pulse 3s ease-in-out infinite;
+  transition: background var(--transition-base), transform var(--transition-base);
+}
+
+.cu-info-card:hover .cu-info-icon-wrap {
+  background: var(--color-blush-mid);
+  transform: scale(1.08);
+}
+
+.cu-info-card-body { flex: 1; }
+
+.cu-info-card-label {
+  font-family: var(--font-caps);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-bottom: 6px;
+}
+
+.cu-info-card-primary {
+  font-family: var(--font-caps);
+  font-size: 17px;
+  color: var(--color-text-dark);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.cu-info-card-secondary {
+  font-size: 13px;
+  color: var(--color-text-light);
+  line-height: 1.55;
+  font-weight: 300;
+}
+
+.cu-info-card-link {
+  color: var(--color-pink-accent);
+  text-decoration: none;
+  transition: opacity var(--transition-base);
+}
+
+.cu-info-card-link:hover { opacity: 0.75; }
+
+/* ================================================================
+   3. MAIN TWO-COLUMN LAYOUT
+   Left: Contact form  |  Right: Office + social details
+================================================================ */
+.cu-main {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 80px 80px;
+  align-items: flex-start;
+  animation: cu-fadeUp 0.6s ease 0.2s both;
+}
+
+/* ── Left: Form card ── */
+.cu-form-card {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  animation: cu-scaleIn 0.5s ease 0.25s both;
+  transition: box-shadow var(--transition-lift);
+}
+
+.cu-form-card:hover { box-shadow: var(--shadow-elevated); }
+
+.cu-form-card-header {
+  background: var(--color-charcoal);
+  padding: 28px 32px 24px;
+}
+
+.cu-form-card-header h2 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--color-white);
+  margin-bottom: 6px;
+}
+
+.cu-form-card-header p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.cu-form-body { padding: 32px 32px 36px; }
+
+/* ── Form rows ── */
+.cu-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.cu-field { margin-bottom: 18px; }
+
+.cu-field label {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--color-text-mid);
+  margin-bottom: 6px;
+}
+
+.cu-field label .required {
+  color: var(--color-pink-accent);
+  margin-left: 2px;
+}
+
+.cu-input,
+.cu-select,
+.cu-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-cream);
+  font-family: var(--font-serif);
+  font-size: 15px;
+  color: var(--color-text-dark);
+  outline: none;
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    background var(--transition-base);
+  appearance: none;
+  resize: none;
+}
+
+.cu-input::placeholder,
+.cu-textarea::placeholder { color: var(--color-text-light); }
+
+.cu-input:focus,
+.cu-select:focus,
+.cu-textarea:focus {
+  border-color: var(--color-pink-accent);
+  box-shadow: 0 0 0 3px rgba(224, 64, 122, 0.1);
+  background: var(--color-white);
+}
+
+.cu-input.error,
+.cu-select.error,
+.cu-textarea.error {
+  border-color: var(--color-pink-accent);
+  box-shadow: 0 0 0 3px rgba(224, 64, 122, 0.08);
+}
+
+.cu-field-error {
+  font-size: 12px;
+  color: var(--color-pink-accent);
+  margin-top: 5px;
+  display: block;
+  animation: cu-fadeIn 0.2s ease both;
+}
+
+.cu-select-wrap { position: relative; }
+.cu-select-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: var(--color-text-light);
+  pointer-events: none;
+}
+
+/* Subject radio chips */
+.cu-subject-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cu-chip {
+  padding: 6px 16px;
+  border-radius: 40px;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  font-family: var(--font-serif);
+  font-size: 13px;
+  color: var(--color-text-mid);
+  cursor: pointer;
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    transform 0.15s ease;
+}
+
+.cu-chip:hover {
+  background: var(--color-blush);
+  border-color: rgba(224,64,122,0.3);
+  transform: translateY(-1px);
+}
+
+.cu-chip.active {
+  background: var(--color-pink-accent);
+  border-color: var(--color-pink-accent);
+  color: var(--color-white);
+}
+
+/* Character counter for message textarea */
+.cu-char-count {
+  text-align: right;
+  font-size: 11px;
+  color: var(--color-text-light);
+  margin-top: 4px;
+  transition: color var(--transition-base);
+}
+
+.cu-char-count.warn { color: var(--color-pink-accent); }
+
+/* Checkbox for newsletter opt-in */
+.cu-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--color-text-mid);
+  line-height: 1.5;
+}
+
+.cu-checkbox-label input[type='checkbox'] {
+  accent-color: var(--color-pink-accent);
+  width: 15px;
+  height: 15px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* Submit button */
+.cu-submit-btn {
+  width: 100%;
+  padding: 15px 0;
+  background: var(--color-pink-accent);
+  color: var(--color-white);
+  border: none;
+  border-radius: 40px;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    background var(--transition-base),
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.cu-submit-btn:hover:not(:disabled) {
+  background: #c8306a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(224, 64, 122, 0.35);
+}
+
+.cu-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner inside button */
+.cu-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: cu-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes cu-spin { to { transform: rotate(360deg); } }
+
+/* Success flash after submission */
+.cu-success-banner {
+  background: #f0faf4;
+  border: 1px solid rgba(34,197,94,0.3);
+  border-radius: 8px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+  animation: cu-scaleIn 0.35s ease both;
+}
+
+.cu-success-icon { font-size: 20px; flex-shrink: 0; }
+
+.cu-success-text h4 {
+  font-family: var(--font-caps);
+  font-size: 14px;
+  color: #166534;
+  margin-bottom: 3px;
+}
+
+.cu-success-text p { font-size: 13px; color: #166534; font-weight: 300; }
+
+/* Global error alert */
+.cu-error-alert {
+  background: #fff0f3;
+  border: 1px solid rgba(224,64,122,0.25);
+  border-radius: 8px;
+  padding: 13px 16px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  color: var(--color-pink-accent);
+  line-height: 1.55;
+  animation: cu-fadeIn 0.25s ease both;
+}
+
+/* ── Right: Office info sidebar ── */
+.cu-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: cu-slideRight 0.6s ease 0.3s both;
+}
+
+.cu-sidebar-card {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  padding: 28px 28px 24px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+  transition: box-shadow var(--transition-lift), transform var(--transition-lift);
+}
+
+.cu-sidebar-card:hover {
+  box-shadow: var(--shadow-elevated);
+  transform: translateY(-3px);
+}
+
+.cu-sidebar-heading {
+  font-family: var(--font-caps);
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-dark);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cu-sidebar-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 14px;
+  color: var(--color-text-mid);
+  line-height: 1.6;
+}
+
+.cu-sidebar-row:last-child { border-bottom: none; }
+
+.cu-sidebar-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  opacity: 0.7;
+}
+
+.cu-sidebar-row a {
+  color: var(--color-pink-accent);
+  text-decoration: none;
+  transition: opacity var(--transition-base);
+}
+
+.cu-sidebar-row a:hover { opacity: 0.75; }
+
+/* Social links in sidebar */
+.cu-social-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.cu-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 40px;
+  border: 1px solid var(--color-border);
+  background: var(--color-cream);
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-mid);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    transform 0.15s ease;
+}
+
+.cu-social-btn:hover {
+  background: var(--color-blush);
+  border-color: rgba(224,64,122,0.3);
+  color: var(--color-pink-accent);
+  transform: translateY(-2px);
+}
+
+/* Hours table */
+.cu-hours-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 13px;
+  color: var(--color-text-mid);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cu-hours-row:last-child { border-bottom: none; }
+
+.cu-hours-day { font-weight: 400; color: var(--color-text-dark); }
+
+.cu-hours-time { color: var(--color-text-light); font-weight: 300; }
+
+.cu-hours-closed { color: var(--color-pink-accent); font-style: italic; }
+
+/* ================================================================
+   4. MAP SECTION
+================================================================ */
+.cu-map-section {
+  padding: 0 80px 80px;
+  max-width: 1360px;
+  margin: 0 auto;
+  animation: cu-fadeUp 0.6s ease 0.35s both;
+}
+
+.cu-map-label {
+  font-family: var(--font-caps);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-bottom: 12px;
+}
+
+.cu-map-wrap {
+  width: 100%;
+  height: 320px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+  position: relative;
+  background: #e8e4dc;
+  transition: box-shadow var(--transition-lift);
+}
+
+.cu-map-wrap:hover { box-shadow: var(--shadow-elevated); }
+
+.cu-map-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  /* BACKEND: Replace src with real Google Maps Embed API URL:
+     https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=New+York,NY
+     Requires: Google Maps Embed API enabled in Cloud Console
+     Billing note: Embed API is free up to 28,000 monthly loads */
+}
+
+/* Placeholder shown when Maps API key not yet configured */
+.cu-map-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(160deg, #e8e4dc 0%, #d4cec8 100%);
+  color: var(--color-text-light);
+  text-align: center;
+  padding: 24px;
+}
+
+.cu-map-placeholder-icon { font-size: 36px; opacity: 0.5; }
+
+.cu-map-placeholder-text {
+  font-family: var(--font-caps);
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--color-text-light);
+}
+
+.cu-map-placeholder-sub { font-size: 12px; color: var(--color-text-light); }
+
+/* ================================================================
+   5. FAQ ACCORDION
+================================================================ */
+.cu-faq {
+  background: var(--color-white);
+  padding: 72px 80px;
+  border-top: 1px solid var(--color-border);
+  animation: cu-fadeUp 0.6s ease 0.4s both;
+}
+
+.cu-faq-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.cu-faq-eyebrow {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-pink-accent);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.cu-faq-heading {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 38px;
+  font-weight: 400;
+  color: var(--color-text-dark);
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.cu-faq-item {
+  border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.cu-faq-item:first-of-type { border-top: 1px solid var(--color-border); }
+
+.cu-faq-question {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: color var(--transition-base);
+}
+
+.cu-faq-question:hover { color: var(--color-pink-accent); }
+
+.cu-faq-q-text {
+  font-family: var(--font-caps);
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  color: inherit;
+  line-height: 1.3;
+}
+
+.cu-faq-chevron {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--color-text-light);
+  transition: transform var(--transition-base), background var(--transition-base), border-color var(--transition-base);
+}
+
+.cu-faq-item.open .cu-faq-chevron {
+  transform: rotate(180deg);
+  background: var(--color-pink-accent);
+  border-color: var(--color-pink-accent);
+  color: var(--color-white);
+}
+
+.cu-faq-answer {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.28s ease,
+              padding 0.28s ease;
+  opacity: 0;
+  padding: 0 0 0;
+}
+
+.cu-faq-item.open .cu-faq-answer {
+  max-height: 400px;
+  opacity: 1;
+  padding-bottom: 20px;
+}
+
+.cu-faq-answer p {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--color-text-mid);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+/* ================================================================
+   6. FREE CONSULTATION CTA BAND
+   Matches pattern used in Testimonials, About, Blogs pages
+================================================================ */
+.cu-cta {
+  background: var(--color-charcoal);
+  padding: 90px 60px;
+  text-align: center;
+  animation: cu-fadeUp 0.6s ease 0.45s both;
+}
+
+.cu-cta-eyebrow {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 10px;
+}
+
+.cu-cta h2 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 42px;
+  font-weight: 400;
+  color: var(--color-white);
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.cu-cta-sub {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 36px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.cu-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 52px;
+  background: var(--color-pink-accent);
+  color: var(--color-white);
+  border: none;
+  border-radius: 40px;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition:
+    background var(--transition-base),
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.cu-cta-btn:hover {
+  background: #c8306a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(224, 64, 122, 0.4);
+}
+
+.cu-cta-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.08em;
+}
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+@media (max-width: 1100px) {
+  .cu-main          { grid-template-columns: 1fr; padding: 48px 48px 60px; }
+  .cu-sidebar       { max-width: 100%; }
+  .cu-info-band     { padding: 0 48px; }
+  .cu-map-section   { padding: 0 48px 60px; }
+  .cu-faq           { padding: 60px 48px; }
+}
+
+@media (max-width: 840px) {
+  .cu-info-grid     { grid-template-columns: 1fr; }
+  .cu-info-card     { border-right: none; border-bottom: 1px solid var(--color-border); }
+  .cu-info-card:last-child { border-bottom: none; }
+  .cu-info-band     { padding: 0 24px; }
+  .cu-main          { padding: 40px 24px 52px; }
+  .cu-map-section   { padding: 0 24px 52px; }
+  .cu-faq           { padding: 48px 24px; }
+  .cu-cta           { padding: 64px 24px; }
+  .cu-hero          { height: 280px; }
+  .cu-hero-title    { font-size: 32px; }
+}
+
+@media (max-width: 600px) {
+  .cu-form-row      { grid-template-columns: 1fr; }
+  .cu-form-body     { padding: 24px 20px 28px; }
+  .cu-form-card-header { padding: 22px 20px; }
+  .cu-hero-title    { font-size: 26px; }
+  .cu-cta h2        { font-size: 30px; }
+  .cu-cta-btn       { padding: 14px 36px; font-size: 15px; }
+  .cu-faq-heading   { font-size: 28px; }
+}

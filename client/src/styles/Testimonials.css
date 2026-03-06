@@ -1,0 +1,558 @@
+/* ============================================================================
+   Testimonials Page Styles
+   Hero quote banner, filterable review grid, video testimonials, CTA
+   ============================================================================ */
+
+/* ============================================================================
+   PAGE CONTAINER
+   ============================================================================ */
+
+.page-container {
+  width: 100%;
+}
+
+main {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ============================================================================
+   HERO BANNER
+   ============================================================================ */
+
+.tm-hero {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #1c1f1a;
+  border-radius: 0;
+}
+
+.tm-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../../assets/frontEnd-images/testimonials-hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.45);
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tm-hero:hover .tm-hero-bg {
+  transform: scale(1.03);
+}
+
+.tm-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 60px 40px;
+  max-width: 860px;
+  animation: fadeInScale 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+}
+
+.tm-hero-quote-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  margin-bottom: 28px;
+  font-size: 20px;
+  color: #fff;
+}
+
+.tm-hero-quote {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: 44px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.25;
+  margin-bottom: 28px;
+  letter-spacing: 0.01em;
+}
+
+.tm-hero-divider {
+  width: 60px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 0 auto 20px;
+}
+
+.tm-hero-attribution {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.tm-hero-attribution span {
+  margin: 0 10px;
+  opacity: 0.5;
+}
+
+/* ============================================================================
+   FILTER BAR
+   ============================================================================ */
+
+.tm-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 28px 0;
+  background: #f8f8f5;
+  flex-wrap: wrap;
+  animation: fadeInScale 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+.tm-filter-btn {
+  padding: 8px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: transparent;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: #444;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tm-filter-btn:hover {
+  border-color: rgba(0, 0, 0, 0.5);
+  color: #111;
+}
+
+.tm-filter-btn.active {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #fff;
+}
+
+/* ============================================================================
+   REVIEWS MASONRY GRID
+   ============================================================================ */
+
+.tm-reviews {
+  padding: 20px 0 40px;
+  background: #f8f8f5;
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+}
+
+.tm-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  align-items: start;
+}
+
+/* Review Card */
+.tm-review-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInScale 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.tm-review-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.tm-review-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+
+.tm-review-card-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.tm-review-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #ddd;
+}
+
+.tm-review-avatar-placeholder {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  background: linear-gradient(135deg, #c8b8a8, #a09080);
+}
+
+.tm-review-author-info {
+  min-width: 0;
+}
+
+.tm-review-author-name {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tm-review-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  color: #aaa;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Category Badge */
+.tm-badge {
+  flex-shrink: 0;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tm-badge--wedding  { background: #fde8e8; color: #c0504a; }
+.tm-badge--corporate { background: #e8f0fd; color: #4a6bc0; }
+.tm-badge--gala      { background: #f0e8fd; color: #7a4ac0; }
+.tm-badge--retreat   { background: #e8fde8; color: #3a9a4a; }
+
+/* Stars */
+.tm-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 12px;
+}
+
+.tm-star {
+  color: #f5a623;
+  font-size: 14px;
+}
+
+.tm-star--empty {
+  color: #ddd;
+}
+
+/* Review Text */
+.tm-review-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #444;
+  font-style: italic;
+}
+
+/* Load More */
+.tm-load-more-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 32px 0 48px;
+}
+
+.tm-load-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tm-load-more-btn:hover {
+  color: #111;
+  gap: 12px;
+}
+
+.tm-load-more-btn svg {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tm-load-more-btn:hover svg {
+  transform: translateY(3px);
+}
+
+/* ============================================================================
+   VIDEO TESTIMONIALS
+   ============================================================================ */
+
+.tm-video-section {
+  padding: 60px 0 80px;
+  background: #fff;
+  text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
+}
+
+.tm-video-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #c8964a;
+  margin-bottom: 10px;
+}
+
+.tm-video-heading {
+  font-family: 'Bodoni Moda', serif;
+  font-style: italic;
+  font-size: 38px;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 44px;
+}
+
+.tm-video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  text-align: left;
+}
+
+.tm-video-card {
+  cursor: pointer;
+}
+
+.tm-video-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #1a1a1a;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tm-video-card:hover .tm-video-thumb {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  transform: translateY(-4px);
+}
+
+.tm-video-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.85;
+  transition: opacity 0.4s ease;
+}
+
+.tm-video-card:hover .tm-video-thumb-img {
+  opacity: 1;
+}
+
+.tm-video-thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tm-video-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tm-video-card:hover .tm-video-play-btn {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.tm-video-duration {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+
+.tm-video-title {
+  font-family: 'Libre Caslon Display', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+
+.tm-video-location {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: #999;
+  letter-spacing: 0.04em;
+}
+
+/* ============================================================================
+   CTA BANNER
+   ============================================================================ */
+
+.tm-cta {
+  padding: 80px 0;
+  background: linear-gradient(180deg, #f5f0ec 0%, #ece8e2 100%);
+  text-align: center;
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;
+}
+
+.tm-cta h2 {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 14px;
+}
+
+.tm-cta p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: #666;
+  max-width: 500px;
+  margin: 0 auto 32px;
+  line-height: 1.65;
+}
+
+.tm-cta-btn {
+  display: inline-block;
+  padding: 14px 48px;
+  background: #c8964a;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tm-cta-btn:hover {
+  background: #a87838;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(200, 150, 74, 0.35);
+}
+
+.tm-cta-btn:active {
+  transform: translateY(0);
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+  .tm-reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tm-video-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .tm-hero-quote {
+    font-size: 30px;
+  }
+
+  .tm-reviews {
+    padding: 20px 24px 40px;
+  }
+
+  .tm-reviews-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tm-video-section {
+    padding: 48px 24px 60px;
+  }
+
+  .tm-video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tm-video-heading {
+    font-size: 28px;
+  }
+
+  .tm-filters {
+    padding: 20px 24px;
+    gap: 8px;
+  }
+
+  .tm-filter-btn {
+    font-size: 13px;
+    padding: 7px 16px;
+  }
+
+  .tm-cta h2 {
+    font-size: 28px;
+  }
+}

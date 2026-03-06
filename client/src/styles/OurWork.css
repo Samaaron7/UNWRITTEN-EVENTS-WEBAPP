@@ -1,0 +1,546 @@
+/* ============================================================
+   OurWork.css — Unwritten Events · Our Work page
+   Follows the shared brand token system from the site design
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@400;600&family=Libre+Caslon+Display&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400;1,6..96,700&display=swap');
+
+/* ── Shared animation keyframes ── */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── Brand tokens ── */
+:root {
+  --color-cream:        #f8f8f5;
+  --color-blush:        #f5ecec;
+  --color-blush-mid:    #f0e4e4;
+  --color-pink-accent:  #e0407a;
+  --color-charcoal:     #1a1814;
+  --color-text-dark:    #1a1a1a;
+  --color-text-mid:     #444;
+  --color-text-light:   #777;
+  --color-border:       rgba(0, 0, 0, 0.08);
+  --color-white:        #ffffff;
+
+  --font-display:  'Bodoni Moda', serif;
+  --font-serif:    'Cormorant Garamond', serif;
+  --font-caps:     'Libre Caslon Display', serif;
+
+  --max-width: 1440px;
+  --page-gutter: 40px;
+  --section-gap: 100px;
+}
+
+/* ── Reset (scoped) ── */
+.ap-root *,
+.ap-root *::before,
+.ap-root *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ═══════════════════════════════════════
+   ROOT WRAPPER
+═══════════════════════════════════════ */
+.ap-root {
+  font-family: var(--font-serif);
+  background-color: var(--color-cream);
+  color: var(--color-text-dark);
+  min-height: 100vh;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter);
+}
+
+/* Add padding to content wrapper */
+.ap-root > section:not(.ap-hero) {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* ═══════════════════════════════════════
+   HERO BANNER  ("Our Work Speaks for Itself")
+═══════════════════════════════════════ */
+.ap-hero {
+  position: relative;
+  width: calc(100% + 2 * var(--page-gutter));
+  height: 320px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #ece7df 0%, #d8cfc4 100%);
+  animation: fadeInScale 0.6s ease both;
+  margin-left: calc(-1 * var(--page-gutter));
+  margin-right: calc(-1 * var(--page-gutter));
+}
+
+.ap-hero-bg {
+  position: absolute;
+  inset: 0;
+  /* Replace with real hero image once available:
+     background: url('src/assets/frontEnd-images/ourwork_hero.jpg') center/cover no-repeat; */
+  background: linear-gradient(160deg, #e8e2d8 0%, #cfc5b8 50%, #b8b0a4 100%);
+}
+
+.ap-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.28) 60%,
+    rgba(0, 0, 0, 0.48) 100%
+  );
+}
+
+.ap-hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  animation: fadeInScale 0.7s ease 0.1s both;
+}
+
+.ap-hero-eyebrow {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.ap-hero-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 52px;
+  font-weight: 400;
+  color: var(--color-white);
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+}
+
+.ap-hero-divider {
+  width: 48px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.45);
+  margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════
+   OUR STORY  (video + copy two-col)
+═══════════════════════════════════════ */
+.ap-story {
+  padding: 80px 0;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 64px;
+  align-items: flex-start;
+  background: var(--color-white);
+  margin: 0 auto;
+  justify-items: center;
+  max-width: 100%;
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+}
+
+/* ── Video block ── */
+.ap-story-media {
+  position: relative;
+}
+
+.ap-story-media-border {
+  /* Decorative pink-left border accent from Figma */
+  position: absolute;
+  top: 12px;
+  left: -10px;
+  width: 16px;
+  height: calc(100% - 24px);
+  background: #f5c8d8;
+  border-radius: 2px;
+  z-index: 0;
+}
+
+.ap-video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--color-charcoal);
+  z-index: 1;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+.ap-video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Placeholder shown when no video src is present */
+.ap-video-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: linear-gradient(160deg, #e8e4dc 0%, #c8bfb4 100%);
+  color: var(--color-text-mid);
+  text-align: center;
+  padding: 32px;
+}
+
+.ap-video-placeholder-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(224, 64, 122, 0.12);
+  border: 1.5px solid rgba(224, 64, 122, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ap-video-placeholder-icon svg {
+  fill: var(--color-pink-accent);
+  margin-left: 4px; /* optical center for play triangle */
+}
+
+.ap-video-placeholder-label {
+  font-family: var(--font-caps);
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-mid);
+}
+
+.ap-video-placeholder-sub {
+  font-size: 12px;
+  color: var(--color-text-light);
+  letter-spacing: 0.06em;
+}
+
+/* Video caption strip */
+.ap-video-caption {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--color-text-light);
+  letter-spacing: 0.1em;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ── Story copy ── */
+.ap-story-copy {
+  padding-top: 8px;
+}
+
+.ap-story-eyebrow {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: var(--color-pink-accent);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.ap-story-heading {
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.ap-story-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ap-story-body p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-text-mid);
+  font-weight: 300;
+}
+
+/* ═══════════════════════════════════════
+   CORE VALUES
+═══════════════════════════════════════ */
+.ap-values {
+  background: var(--color-blush);
+  padding: 80px 0;
+  text-align: center;
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+}
+
+.ap-values-heading {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--color-text-dark);
+  margin-bottom: 52px;
+}
+
+.ap-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.ap-value-card {
+  background: var(--color-white);
+  border-radius: 6px;
+  padding: 40px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInScale 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.ap-value-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.ap-value-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(224, 64, 122, 0.08);
+  border: 1px solid rgba(224, 64, 122, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.ap-value-title {
+  font-family: var(--font-caps);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--color-text-dark);
+  letter-spacing: 0.04em;
+}
+
+.ap-value-desc {
+  font-size: 14px;
+  color: var(--color-text-light);
+  line-height: 1.7;
+  font-weight: 300;
+  text-align: center;
+  max-width: 240px;
+}
+
+/* ═══════════════════════════════════════
+   MEET THE TEAM
+═══════════════════════════════════════ */
+.ap-team {
+  padding: 90px 0;
+  background: var(--color-white);
+  text-align: center;
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+}
+
+.ap-team-eyebrow {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-pink-accent);
+  margin-bottom: 10px;
+}
+
+.ap-team-heading {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 44px;
+  font-weight: 400;
+  color: var(--color-text-dark);
+  margin-bottom: 52px;
+}
+
+.ap-team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.ap-team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: fadeInScale 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ap-team-member:hover {
+  transform: translateY(-6px);
+}
+
+.ap-team-avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--color-white);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.ap-team-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ap-team-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #aaa;
+  letter-spacing: 0.06em;
+}
+
+.ap-team-name {
+  font-family: var(--font-caps);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--color-text-dark);
+  letter-spacing: 0.04em;
+}
+
+.ap-team-role {
+  font-family: var(--font-serif);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-pink-accent);
+  font-weight: 400;
+}
+
+/* ═══════════════════════════════════════
+   CTA BANNER
+═══════════════════════════════════════ */
+.ap-cta {
+  background: var(--color-charcoal);
+  padding: 90px 0;
+  text-align: center;
+  margin-left: var(--page-gutter);
+  margin-right: var(--page-gutter);
+  animation: fadeInScale 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+}
+
+.ap-cta h2 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--color-white);
+  margin-bottom: 14px;
+}
+
+.ap-cta-sub {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 36px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+.ap-cta-btn {
+  display: inline-block;
+  padding: 14px 44px;
+  background: var(--color-pink-accent);
+  color: var(--color-white);
+  border: none;
+  border-radius: 40px;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ap-cta-btn:hover {
+  background: #c8306a;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.ap-cta-btn:active {
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  :root { --page-gutter: 48px; }
+
+  .ap-story {
+    grid-template-columns: 1fr;
+  }
+
+  .ap-story-media {
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .ap-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ap-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .ap-footer {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .ap-footer-mid { display: none; }
+}
+
+@media (max-width: 768px) {
+  :root { --page-gutter: 24px; }
+
+  .ap-hero { height: 240px; }
+  .ap-hero-title { font-size: 36px; }
+
+  .ap-values-grid { grid-template-columns: 1fr; max-width: 420px; }
+  .ap-team-grid { grid-template-columns: repeat(2, 1fr); max-width: 480px; }
+
+  .ap-nav-links { gap: 18px; flex-wrap: wrap; justify-content: center; }
+
+  .ap-story { padding: 52px var(--page-gutter); gap: 40px; }
+}

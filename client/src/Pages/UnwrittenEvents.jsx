@@ -5,7 +5,7 @@
  * Uses: Shared Header/Footer, external CSS, hash-based routing
  */
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../styles/UnwrittenEvents.css';
@@ -18,6 +18,14 @@ const GALLERY_ITEMS = [
   { label: 'Summer Solstice Gala' },
   { label: 'Vineyard Wedding' },
   { label: 'Nordic Winter Retreat' },
+];
+
+// Carousel images for hero section
+const HERO_CAROUSEL_IMAGES = [
+  'src/assets/frontEnd-images/Home-image.png',
+  'src/assets/frontEnd-images/Home-image-2.png',
+  'src/assets/frontEnd-images/services_image.jpg',
+  'src/assets/frontEnd-images/Home_page_main_picture.jpg',
 ];
 
 // Journal articles
@@ -50,6 +58,18 @@ const stripColors = [
 
 export default function UnwrittenEvents() {
   const stripRef = useRef(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Carousel auto-rotation effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) =>
+        (prevIndex + 1) % HERO_CAROUSEL_IMAGES.length
+      );
+    }, 3000); // Change image every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="ue-root page-container">
@@ -58,10 +78,12 @@ export default function UnwrittenEvents() {
       {/* HERO */}
       <section id="home" className="ue-hero">
         <div className="ue-hero-img-wrap">
-          {/* HERO IMAGE: Replace src with your image path, e.g., "assets/images/hero-home.jpg" */}
+          {/* HERO CAROUSEL: Rotates through multiple images every 3 seconds */}
           <img
-            src="assets/images/hero-home.jpg"
-            alt="Elegant wedding setup"
+            key={currentImageIndex}
+            src={HERO_CAROUSEL_IMAGES[currentImageIndex]}
+            alt="Elegant event setup"
+            className="ue-hero-carousel-img"
             onError={(e) => {
               e.target.style.display = 'none';
               e.target.nextSibling.style.display = 'block';
@@ -78,13 +100,11 @@ export default function UnwrittenEvents() {
           />
           <div className="ue-hero-gradient-overlay" />
           <div className="ue-hero-copy">
-            <h1 className="ue-hero-title">Unwritten Events</h1>
+            <h1 className="ue-hero-title">UNWRITTEN EVENTS</h1>
             <p className="ue-hero-sub">
-              Transform your vision into an extraordinary, stress-free celebration
-              with exquisite floral, bespoke décor, and expert planning—luxury event
-              production at its finest in New York.
+            We create unforgettable moments where design meets emotion, ensuring your story is beautifully told and every detail feels intentional—luxury event production at its finest in New York.
             </p>
-            <button className="ue-hero-cta">Schedule FREE Strategy Call</button>
+            <button className="ue-hero-cta" onClick={() => window.location.hash = '#/free-consultation'}>Schedule FREE Strategy Call</button>
           </div>
         </div>
       </section>
@@ -115,13 +135,10 @@ export default function UnwrittenEvents() {
       <section className="ue-who">
         <h2>WHO WE ARE</h2>
         <p>
-          Our warm and welcoming approach makes you feel like family. With a
-          friendly demeanor at the heart of our service, every interaction is a
-          delightful experience. We pride ourselves on building genuine
-          connections, ensuring you always feel heard and valued.
+        We take the time to truly understand you, so every element reflects your vision with care, depth, and intention. We believe the most beautiful events begin with connection, with listening, understanding, and honoring what matters most to you. From our first conversation to the final reveal, we pour thoughtfulness into every detail, creating an atmosphere that feels meaningful, immersive, and full of emotion. Our hope is that when you walk into your event, it feels less like a production and more like a reflection of your story.
         </p>
         <div className="ue-who-cta-row">
-          <button className="ue-who-btn">SEE OUR WORK!</button>
+          <button className="ue-who-btn" onClick={() => window.location.hash = '#/our-work'}>SEE OUR WORK!</button>
           <p className="ue-who-tagline">A COHESIVE EXPERIENCE, FROM START TO FINISH</p>
         </div>
       </section>
@@ -195,7 +212,7 @@ export default function UnwrittenEvents() {
             </div>
           ))}
         </div>
-        <button className="ue-crafting-btn">LET'S CHAT!</button>
+        <button className="ue-crafting-btn" onClick={() => window.location.hash = '#/free-consultation'}>LET'S CHAT!</button>
       </section>
 
       {/* JOURNAL / BLOG */}

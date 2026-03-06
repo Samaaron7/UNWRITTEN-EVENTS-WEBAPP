@@ -13,9 +13,10 @@ import '../styles/ServicesPage.css';
 const NAV_LINKS = [
   { label: 'HOME', href: '#/' },
   { label: 'SERVICES', href: '#/services', active: true },
-  { label: 'TESTIMONIALS', href: '#testimonials' },
-  { label: 'BLOGS', href: '#blogs' },
-  { label: 'CONTACT US', href: '#contact' },
+  { label: 'TESTIMONIALS', href: '#/testimonials' },
+  { label: 'OUR WORK', href: '#/our-work' },
+  { label: 'BLOGS', href: '#/blogs' },
+  { label: 'CONTACT US', href: '#/contact' },
 ];
 
 // Service items data

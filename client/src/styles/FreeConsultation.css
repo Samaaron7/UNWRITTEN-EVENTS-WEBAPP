@@ -1,0 +1,859 @@
+/* ================================================================
+   FreeConsultation.css
+   Unwritten Events · Book a Free Strategy Call page
+   
+   Design tokens are consistent with the full site system:
+     --color-pink-accent / --color-charcoal / --font-display etc.
+   
+   All animation names prefixed "fc-" to avoid collisions.
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@400;600&family=Libre+Caslon+Display&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&display=swap');
+
+/* ── Brand tokens ───────────────────────────────────────────── */
+:root {
+  --color-cream:         #f8f8f5;
+  --color-bg-section:    #f2efe9;
+  --color-blush:         #f5ecec;
+  --color-purple-accent: #6b46c1; /* Calendly / booking CTA purple matching Figma */
+  --color-purple-light:  #ede9f8;
+  --color-purple-border: rgba(107, 70, 193, 0.35);
+  --color-pink-accent:   #e0407a;
+  --color-charcoal:      #1a1814;
+  --color-text-dark:     #1a1a1a;
+  --color-text-mid:      #444;
+  --color-text-light:    #888;
+  --color-border:        rgba(0, 0, 0, 0.08);
+  --color-white:         #ffffff;
+
+  --font-display: 'Bodoni Moda', serif;
+  --font-serif:   'Cormorant Garamond', serif;
+  --font-caps:    'Libre Caslon Display', serif;
+
+  --radius-card:     12px;
+  --shadow-card:     0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-elevated: 0 12px 48px rgba(0, 0, 0, 0.13);
+  --transition-base: 0.25s ease;
+  --transition-lift: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Entry keyframes ────────────────────────────────────────── */
+@keyframes fc-fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fc-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fc-scaleIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Pulse ring on the avatar / success icon */
+@keyframes fc-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(107, 70, 193, 0.35); }
+  70%  { box-shadow: 0 0 0 12px rgba(107, 70, 193, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(107, 70, 193, 0); }
+}
+
+/* ================================================================
+   PAGE WRAPPER
+================================================================ */
+.fc-root {
+  font-family: var(--font-serif);
+  background-color: var(--color-cream);
+  color: var(--color-text-dark);
+  min-height: 100vh;
+  /* max-width matches site-wide 1440px cap set in page-container */
+}
+
+/* ================================================================
+   PAGE HERO BAND
+   "BOOK A FREE STRATEGY CALL WITH US!"
+================================================================ */
+.fc-hero {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  padding: 56px 60px 40px;
+  text-align: center;
+  animation: fc-fadeUp 0.55s ease both;
+}
+
+.fc-hero-label {
+  /* Small eyebrow above main heading */
+  font-family: var(--font-serif);
+  font-size: 11px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--color-purple-accent);
+  margin-bottom: 10px;
+}
+
+.fc-hero-title {
+  /* Main heading — Figma uses a tight caps serif at ~40px */
+  font-family: var(--font-caps);
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--color-text-dark);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.fc-hero-sub {
+  font-size: 17px;
+  color: var(--color-text-light);
+  font-weight: 300;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ================================================================
+   MAIN LAYOUT  — two columns on ≥900px, stacked on mobile
+   Left: Calendly embed  |  Right: Custom detail form
+================================================================ */
+.fc-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 52px 60px 80px;
+  align-items: flex-start;
+  animation: fc-fadeUp 0.6s ease 0.1s both;
+}
+
+/* ================================================================
+   STEP INDICATOR  (Step 1 / Step 2)
+================================================================ */
+.fc-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 24px;
+}
+
+.fc-step-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-serif);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--color-text-light);
+  transition: color var(--transition-base);
+}
+
+.fc-step-item.active { color: var(--color-purple-accent); }
+.fc-step-item.done   { color: var(--color-text-mid); }
+
+.fc-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background var(--transition-base), color var(--transition-base);
+}
+
+.fc-step-item.active .fc-step-num {
+  background: var(--color-purple-accent);
+  border-color: var(--color-purple-accent);
+  color: var(--color-white);
+}
+
+.fc-step-item.done .fc-step-num {
+  background: var(--color-text-mid);
+  border-color: var(--color-text-mid);
+  color: var(--color-white);
+}
+
+.fc-step-connector {
+  flex: 1;
+  max-width: 40px;
+  height: 1px;
+  background: var(--color-border);
+  margin: 0 8px;
+}
+
+/* ================================================================
+   CALENDLY EMBED CARD  (Left column)
+   
+   BACKEND NOTE:
+   This card wraps either:
+     (a) Inline Calendly embed  — via <script> tag + div#calendly-inline-widget
+     (b) Custom calendar built with Google Calendar API
+   See comments inside CalendlyBlock component in FreeConsultation.jsx
+================================================================ */
+.fc-calendly-card {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: box-shadow var(--transition-lift);
+  animation: fc-scaleIn 0.5s ease 0.15s both;
+}
+
+.fc-calendly-card:hover {
+  box-shadow: var(--shadow-elevated);
+}
+
+/* Host info strip at the top of the calendly-style card */
+.fc-host-strip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.fc-host-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  animation: fc-pulse 2.5s ease-in-out infinite;
+  /* BACKEND: Replace placeholder with consultant profile image
+     <img src="src/assets/frontEnd-images/consultant_avatar.jpg" /> */
+}
+
+.fc-host-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #c8a888, #a07858);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-size: 16px;
+  font-family: var(--font-caps);
+}
+
+.fc-host-info-company {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-bottom: 3px;
+}
+
+.fc-host-info-name {
+  font-family: var(--font-caps);
+  font-size: 17px;
+  color: var(--color-text-dark);
+  font-weight: 400;
+}
+
+.fc-host-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 24px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.fc-host-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--color-text-mid);
+}
+
+.fc-host-meta-icon {
+  font-size: 14px;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+/* ── Custom Calendar (used when not embedding Calendly directly) ── */
+.fc-calendar-wrap {
+  padding: 20px 24px 24px;
+}
+
+.fc-calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.fc-calendar-nav-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-base), border-color var(--transition-base);
+  font-size: 14px;
+  color: var(--color-text-mid);
+}
+
+.fc-calendar-nav-btn:hover {
+  background: var(--color-purple-light);
+  border-color: var(--color-purple-border);
+}
+
+.fc-calendar-month {
+  font-family: var(--font-caps);
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  color: var(--color-text-dark);
+}
+
+/* Day-of-week header row */
+.fc-cal-dow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 6px;
+}
+
+.fc-cal-dow-cell {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  padding: 4px 0;
+}
+
+/* Date grid */
+.fc-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.fc-cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: background var(--transition-base), color var(--transition-base);
+  position: relative;
+}
+
+.fc-cal-day:hover:not(.disabled):not(.selected) {
+  background: var(--color-purple-light);
+  color: var(--color-purple-accent);
+}
+
+.fc-cal-day.selected {
+  background: var(--color-purple-accent);
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.fc-cal-day.today {
+  border: 1.5px solid var(--color-purple-accent);
+  color: var(--color-purple-accent);
+}
+
+.fc-cal-day.disabled {
+  color: var(--color-border);
+  cursor: default;
+  pointer-events: none;
+}
+
+.fc-cal-day.empty { pointer-events: none; }
+
+/* Timezone label */
+.fc-timezone-label {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* ── Time slots column ── */
+.fc-timeslot-col {
+  padding: 20px 20px 24px;
+  border-left: 1px solid var(--color-border);
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  /* BACKEND NOTE: Time slots are fetched from Google Calendar Free/Busy API.
+     Unavailable slots should have disabled=true and the button styled accordingly.
+     See fetchAvailableSlots() in FreeConsultation.jsx */
+}
+
+.fc-timeslot-date-label {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  color: var(--color-text-light);
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+
+.fc-timeslot-btn {
+  width: 100%;
+  padding: 11px 0;
+  border: 1.5px solid var(--color-purple-accent);
+  border-radius: 6px;
+  background: var(--color-white);
+  color: var(--color-purple-accent);
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition:
+    background var(--transition-base),
+    color var(--transition-base),
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.fc-timeslot-btn:hover {
+  background: var(--color-purple-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(107, 70, 193, 0.2);
+}
+
+.fc-timeslot-btn.selected {
+  background: var(--color-purple-accent);
+  color: var(--color-white);
+  box-shadow: 0 4px 16px rgba(107, 70, 193, 0.35);
+}
+
+.fc-timeslot-btn:disabled {
+  border-color: var(--color-border);
+  color: var(--color-text-light);
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+  box-shadow: none;
+}
+
+/* inner two-pane layout inside the calendar card */
+.fc-calendar-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0;
+}
+
+/* ================================================================
+   DETAILS FORM CARD  (Right column)
+   
+   BACKEND NOTE:
+   On submit, POST to your backend endpoint:
+     POST /api/consultations/book
+   Payload shape defined in handleBooking() in FreeConsultation.jsx
+================================================================ */
+.fc-form-card {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: box-shadow var(--transition-lift);
+  animation: fc-scaleIn 0.5s ease 0.25s both;
+}
+
+.fc-form-card:hover {
+  box-shadow: var(--shadow-elevated);
+}
+
+/* Schedule detail strip (session info shown above form) */
+.fc-session-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.fc-session-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.fc-session-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #c8a888, #a07858);
+}
+
+.fc-session-label {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-purple-accent);
+  margin-bottom: 4px;
+}
+
+.fc-session-title {
+  font-family: var(--font-caps);
+  font-size: 18px;
+  color: var(--color-text-dark);
+}
+
+.fc-session-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 24px 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.fc-session-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--color-text-mid);
+}
+
+/* Selected date/time displayed in session meta */
+.fc-session-datetime {
+  font-weight: 600;
+  color: var(--color-purple-accent);
+}
+
+/* ── Form fields ── */
+.fc-form-body {
+  padding: 24px 24px 28px;
+}
+
+.fc-form-heading {
+  font-family: var(--font-caps);
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  color: var(--color-text-dark);
+  margin-bottom: 20px;
+}
+
+.fc-field {
+  margin-bottom: 18px;
+}
+
+.fc-field label {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--color-text-mid);
+  margin-bottom: 6px;
+}
+
+.fc-field label span.required {
+  color: var(--color-pink-accent);
+  margin-left: 2px;
+}
+
+.fc-input,
+.fc-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-cream);
+  font-family: var(--font-serif);
+  font-size: 15px;
+  color: var(--color-text-dark);
+  outline: none;
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    background var(--transition-base);
+  appearance: none;
+}
+
+.fc-input::placeholder,
+.fc-select option[value=''] {
+  color: var(--color-text-light);
+}
+
+.fc-input:focus,
+.fc-select:focus {
+  border-color: var(--color-purple-accent);
+  box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.12);
+  background: var(--color-white);
+}
+
+.fc-input.error,
+.fc-select.error {
+  border-color: var(--color-pink-accent);
+  box-shadow: 0 0 0 3px rgba(224, 64, 122, 0.1);
+}
+
+.fc-field-error {
+  font-size: 12px;
+  color: var(--color-pink-accent);
+  margin-top: 4px;
+  display: block;
+  animation: fc-fadeIn 0.2s ease both;
+}
+
+/* Select wrapper with custom chevron */
+.fc-select-wrap {
+  position: relative;
+}
+
+.fc-select-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: var(--color-text-light);
+  pointer-events: none;
+}
+
+/* Budget radio group */
+.fc-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fc-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--color-text-mid);
+  transition: color var(--transition-base);
+}
+
+.fc-radio-label:hover { color: var(--color-text-dark); }
+
+.fc-radio-label input[type='radio'] {
+  accent-color: var(--color-purple-accent);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+/* Legal disclaimer line */
+.fc-legal {
+  font-size: 11px;
+  color: var(--color-text-light);
+  line-height: 1.6;
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+
+.fc-legal a {
+  color: var(--color-purple-accent);
+  text-decoration: underline;
+}
+
+/* Submit button */
+.fc-submit-btn {
+  width: 100%;
+  padding: 14px 0;
+  background: var(--color-purple-accent);
+  color: var(--color-white);
+  border: none;
+  border-radius: 40px;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition:
+    background var(--transition-base),
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.fc-submit-btn:hover:not(:disabled) {
+  background: #5a3ab0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(107, 70, 193, 0.35);
+}
+
+.fc-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Loading spinner inside button */
+.fc-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: fc-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes fc-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ================================================================
+   INFO STRIP — "What to expect" below the two cards
+================================================================ */
+.fc-info-strip {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 60px 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  animation: fc-fadeUp 0.6s ease 0.35s both;
+}
+
+.fc-info-item {
+  background: var(--color-white);
+  border-radius: 8px;
+  padding: 24px 24px 22px;
+  border: 1px solid var(--color-border);
+  transition: transform var(--transition-lift), box-shadow var(--transition-lift);
+}
+
+.fc-info-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.09);
+}
+
+.fc-info-icon {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.fc-info-title {
+  font-family: var(--font-caps);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: var(--color-text-dark);
+  margin-bottom: 6px;
+}
+
+.fc-info-desc {
+  font-size: 13px;
+  color: var(--color-text-light);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+/* ================================================================
+   GOOGLE CALENDAR INTEGRATION SECTION
+   Instructions panel rendered below the form on the page
+================================================================ */
+.fc-gcal-banner {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  padding: 0 60px;
+  animation: fc-fadeUp 0.6s ease 0.4s both;
+}
+
+.fc-gcal-inner {
+  background: var(--color-purple-light);
+  border: 1px solid var(--color-purple-border);
+  border-radius: 10px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.fc-gcal-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.fc-gcal-text h3 {
+  font-family: var(--font-caps);
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  color: var(--color-purple-accent);
+  margin-bottom: 6px;
+}
+
+.fc-gcal-text p {
+  font-size: 14px;
+  color: var(--color-text-mid);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+.fc-gcal-text code {
+  background: rgba(107, 70, 193, 0.1);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  color: var(--color-purple-accent);
+  font-family: monospace;
+}
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+@media (max-width: 1024px) {
+  .fc-layout     { padding: 40px 40px 60px; gap: 28px; }
+  .fc-info-strip { padding: 0 40px 60px; }
+  .fc-gcal-banner{ padding: 0 40px; }
+}
+
+@media (max-width: 900px) {
+  .fc-layout {
+    grid-template-columns: 1fr;
+    padding: 32px 24px 60px;
+    gap: 24px;
+  }
+
+  .fc-calendar-inner { grid-template-columns: 1fr; }
+
+  .fc-timeslot-col {
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px 24px;
+  }
+
+  .fc-timeslot-btn { width: auto; padding: 9px 18px; margin-bottom: 0; }
+
+  .fc-info-strip  { grid-template-columns: 1fr; padding: 0 24px 48px; }
+  .fc-gcal-banner { padding: 0 24px; }
+  .fc-hero        { padding: 40px 24px 28px; }
+}
+
+@media (max-width: 600px) {
+  .fc-hero-title  { font-size: 22px; }
+  .fc-layout      { padding: 24px 16px 48px; }
+  .fc-form-body   { padding: 18px 18px 22px; }
+  .fc-host-strip,
+  .fc-session-strip { padding: 16px 18px; }
+  .fc-gcal-inner  { flex-direction: column; gap: 12px; }
+}

@@ -1,0 +1,409 @@
+/* ============================================================
+   Blogs.css — Unwritten Events · Blogs listing page
+   Matches site-wide design tokens and transition patterns
+   used across UnwrittenEvents.css, Testimonials.css, etc.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@400;600&family=Libre+Caslon+Display&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&display=swap');
+
+/* ── Brand tokens (mirrors site-wide system) ── */
+:root {
+  --color-cream:       #f8f8f5;
+  --color-bg-section:  #f2efe9;
+  --color-blush:       #f5ecec;
+  --color-pink-accent: #e0407a;
+  --color-charcoal:    #1a1814;
+  --color-text-dark:   #1a1a1a;
+  --color-text-mid:    #555;
+  --color-text-light:  #888;
+  --color-border:      rgba(0, 0, 0, 0.08);
+  --color-white:       #ffffff;
+
+  --font-display: 'Bodoni Moda', serif;
+  --font-serif:   'Cormorant Garamond', serif;
+  --font-caps:    'Libre Caslon Display', serif;
+
+  --transition-base:  0.25s ease;
+  --transition-lift:  0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --shadow-card:      0 4px 20px rgba(0, 0, 0, 0.07);
+  --shadow-card-hover:0 12px 40px rgba(0, 0, 0, 0.14);
+}
+
+/* ═══════════════════════════════════════
+   PAGE ENTRY ANIMATION
+   (same fade-up used in Testimonials.css)
+═══════════════════════════════════════ */
+@keyframes bl-fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bl-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════
+   HERO BANNER
+═══════════════════════════════════════ */
+.bl-hero {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #ece7df 0%, #d8cfc4 100%);
+  animation: bl-fadeIn 0.6s ease both;
+}
+
+.bl-hero-bg {
+  position: absolute;
+  inset: 0;
+  /* Replace with real hero image once available:
+     background: url('src/assets/frontEnd-images/blogs_hero.jpg') center/cover no-repeat; */
+  background: linear-gradient(160deg, #e8e2d8 0%, #cfc5b8 50%, #b8b0a4 100%);
+}
+
+.bl-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.28) 60%,
+    rgba(0, 0, 0, 0.48) 100%
+  );
+}
+
+.bl-hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  animation: bl-fadeUp 0.7s ease 0.1s both;
+}
+
+.bl-hero-eyebrow {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.bl-hero-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 52px;
+  font-weight: 400;
+  color: var(--color-white);
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+}
+
+.bl-hero-divider {
+  width: 48px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.45);
+  margin-top: 4px;
+}
+
+/* ═══════════════════════════════════════
+   FILTER BAR  (mirrors Testimonials filter)
+═══════════════════════════════════════ */
+.bl-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 32px 60px 0;
+  flex-wrap: wrap;
+  animation: bl-fadeUp 0.6s ease 0.2s both;
+}
+
+.bl-filter-btn {
+  padding: 8px 22px;
+  border: 1px solid var(--color-border);
+  border-radius: 40px;
+  background: var(--color-white);
+  font-family: var(--font-serif);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--color-text-mid);
+  cursor: pointer;
+  transition: background var(--transition-base),
+              color var(--transition-base),
+              border-color var(--transition-base),
+              transform 0.15s ease;
+}
+
+.bl-filter-btn:hover {
+  background: var(--color-blush);
+  border-color: rgba(224, 64, 122, 0.25);
+  color: var(--color-text-dark);
+  transform: translateY(-1px);
+}
+
+.bl-filter-btn.active {
+  background: var(--color-charcoal);
+  border-color: var(--color-charcoal);
+  color: var(--color-white);
+}
+
+/* ═══════════════════════════════════════
+   SECTION HEADER
+═══════════════════════════════════════ */
+.bl-section-header {
+  padding: 52px 80px 8px;
+  animation: bl-fadeUp 0.6s ease 0.25s both;
+}
+
+.bl-section-label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--color-text-dark);
+  letter-spacing: 0.01em;
+}
+
+/* ═══════════════════════════════════════
+   BLOG GRID  — 2-column top + 2-column bottom
+   (matching Figma layout, expanded to 4 cards)
+═══════════════════════════════════════ */
+.bl-grid-section {
+  padding: 32px 80px 72px;
+  background: var(--color-bg-section);
+}
+
+.bl-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+/* ── Individual Blog Card ── */
+.bl-card {
+  background: var(--color-white);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  /* Entry animation — staggered via inline style */
+  animation: bl-fadeUp 0.55s ease both;
+
+  transition:
+    transform var(--transition-lift),
+    box-shadow var(--transition-lift),
+    border-color var(--transition-base);
+}
+
+.bl-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(224, 64, 122, 0.15);
+}
+
+.bl-card:focus-visible {
+  outline: 2px solid var(--color-pink-accent);
+  outline-offset: 3px;
+}
+
+/* Card thumbnail */
+.bl-card-thumb {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bl-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.bl-card:hover .bl-card-thumb img {
+  transform: scale(1.04);
+}
+
+/* Gradient placeholder when image not loaded */
+.bl-card-thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.bl-card:hover .bl-card-thumb-placeholder {
+  transform: scale(1.04);
+}
+
+/* Card body */
+.bl-card-body {
+  padding: 24px 28px 28px;
+}
+
+.bl-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.bl-card-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 2px;
+  font-family: var(--font-serif);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--color-charcoal);
+  color: var(--color-white);
+}
+
+/* Badge colour variants */
+.bl-card-badge--trends    { background: #3a3020; }
+.bl-card-badge--hosting   { background: #1a2838; }
+.bl-card-badge--design    { background: #2a1828; }
+.bl-card-badge--lifestyle { background: #1a2a20; }
+
+.bl-card-date {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  color: var(--color-text-light);
+  letter-spacing: 0.06em;
+}
+
+.bl-card-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--color-text-dark);
+  line-height: 1.25;
+  margin-bottom: 10px;
+  transition: color var(--transition-base);
+}
+
+.bl-card:hover .bl-card-title {
+  color: var(--color-pink-accent);
+}
+
+.bl-card-excerpt {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  color: var(--color-text-mid);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.bl-card-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  font-family: var(--font-serif);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  transition: color var(--transition-base), gap var(--transition-base);
+}
+
+.bl-card:hover .bl-card-read-more {
+  color: var(--color-pink-accent);
+  gap: 10px;
+}
+
+.bl-card-read-more svg {
+  transition: transform var(--transition-base);
+}
+
+.bl-card:hover .bl-card-read-more svg {
+  transform: translateX(3px);
+}
+
+/* ── Empty state ── */
+.bl-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 72px 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--color-text-light);
+}
+
+/* ═══════════════════════════════════════
+   CTA BANNER  (matches Testimonials CTA)
+═══════════════════════════════════════ */
+.bl-cta {
+  background: var(--color-charcoal);
+  padding: 90px 60px;
+  text-align: center;
+}
+
+.bl-cta h2 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--color-white);
+  margin-bottom: 14px;
+}
+
+.bl-cta-sub {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 36px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+.bl-cta-btn {
+  display: inline-block;
+  padding: 14px 48px;
+  background: var(--color-pink-accent);
+  color: var(--color-white);
+  border: none;
+  border-radius: 40px;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background var(--transition-base), transform 0.15s ease;
+}
+
+.bl-cta-btn:hover {
+  background: #c8306a;
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 900px) {
+  .bl-grid          { grid-template-columns: 1fr; }
+  .bl-grid-section  { padding: 24px 32px 60px; }
+  .bl-section-header{ padding: 40px 32px 8px; }
+  .bl-filters       { padding: 28px 32px 0; }
+  .bl-hero          { height: 240px; }
+  .bl-hero-title    { font-size: 36px; }
+}
+
+@media (max-width: 600px) {
+  .bl-grid-section  { padding: 20px 16px 48px; }
+  .bl-section-header{ padding: 32px 16px 8px; }
+  .bl-filters       { padding: 20px 16px 0; gap: 8px; }
+  .bl-card-body     { padding: 18px 20px 22px; }
+  .bl-card-title    { font-size: 22px; }
+}
